@@ -23,32 +23,32 @@ slice_classes = ["axial", "coronal", "sagittal"]
 classification_transform = transforms.Compose([
     transforms.Resize((224, 224)),  # оптимальный размер для EfficientNet-B0
     transforms.ToTensor(),
-    transforms.Normalize(mean=[0.5], std=[0.5])
+    transforms.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5])
 ])
 
 
+def ensure_rgb(image: Image.Image) -> Image.Image:
+    """Убедиться, что изображение в RGB. Используется и в классификации, и в YOLO."""
+    if image.mode != "RGB":
+        return image.convert("RGB")
+    return image
+
 def classify_slice(image: Image.Image) -> str:
-    """
-    Классифицирует тип среза мозга: axial, coronal, sagittal.
-    Использует уменьшенную копию изображения (224x224).
-    """
+    """Классификация типа среза."""
+    image = ensure_rgb(image)
     input_tensor = classification_transform(image).unsqueeze(0)
     with torch.no_grad():
         output = classification_model(input_tensor)
         predicted = torch.argmax(output, dim=1).item()
     return slice_classes[predicted]
 
-
-def detect_tumor(original_image: Image.Image, slice_type: str) -> Image.Image:
-    """
-    Детектирует опухоль на изображении с помощью соответствующей YOLO модели.
-    Работает с 640x640 изображением.
-    """
+def detect_tumor(image: Image.Image, slice_type: str) -> Image.Image:
+    """Детекция опухоли YOLO-моделью."""
+    image = ensure_rgb(image)
     model = yolo_models.get(slice_type.lower())
     if model is None:
-        raise ValueError(f"No YOLO model found for slice type: {slice_type}")
-
-    resized_image = original_image.resize((512, 512))
-    results = model.predict(resized_image, conf=0.25, save=False, imgsz=640)
+        raise ValueError(f"YOLO model not found for slice type: {slice_type}")
+    
+    results = model.predict(image, conf=0.25, save=False, imgsz=512)
     annotated_image = results[0].plot()
     return Image.fromarray(annotated_image)
