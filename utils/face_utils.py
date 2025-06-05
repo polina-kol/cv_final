@@ -16,7 +16,7 @@ def detect_and_blur_faces(image: Image.Image) -> Image.Image:
     Returns:
         PIL.Image: Изображение с заблюренными лицами.
     """
-    results = face_model.predict(image, conf=0.25, save=False, imgsz=640)
+    results = face_model.predict(image, conf=0.15, save=False, imgsz=640)
     
     # Преобразуем PIL → numpy → для редактирования
     img_np = np.array(image.convert("RGB"))
