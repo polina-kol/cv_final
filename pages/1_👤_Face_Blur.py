@@ -4,7 +4,7 @@ import requests
 from PIL import Image
 from io import BytesIO
 
-st.set_page_config(page_title="Детекция лиц и блюринг", page_icon="😷")
+st.set_page_config(page_title="Детекция лиц и блюринг", page_icon="👤")
 st.title("👤 Детекция лиц и блюринг")
 
 tab1, tab2 = st.tabs(["Сервис", "Информация о модели"])
