@@ -49,6 +49,6 @@ def detect_tumor(image: Image.Image, slice_type: str) -> Image.Image:
     if model is None:
         raise ValueError(f"YOLO model not found for slice type: {slice_type}")
     
-    results = model.predict(image, conf=0.25, save=False, imgsz=512)
+    results = model.predict(image, conf=0.1, save=False, imgsz=512)
     annotated_image = results[0].plot()
     return Image.fromarray(annotated_image)
