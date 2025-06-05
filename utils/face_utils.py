@@ -4,7 +4,7 @@ from PIL import Image, ImageDraw, ImageFilter
 import numpy as np
 
 # Загрузка YOLO модели (предположим, она в models/yolo_face.pt)
-face_model = YOLO("models/yolo_face.pt")
+face_model = YOLO("models/yolo_face2.pt")
 
 def detect_and_blur_faces(image: Image.Image) -> Image.Image:
     """
