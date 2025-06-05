@@ -21,7 +21,7 @@ with tab1:
                 image = Image.open(file).convert("RGB")
                 result = detect_and_blur_faces(image)
                 
-                st.image(result, caption=f"Обработано: {file.name}", use_column_width=True)
+                st.image(result, caption=f"Обработано: {file.name}", use_container_width=True)
                 
                 buf = BytesIO()
                 result.save(buf, format="PNG")
@@ -40,7 +40,7 @@ with tab1:
                 image = Image.open(BytesIO(response.content)).convert("RGB")
                 result = detect_and_blur_faces(image)
 
-                st.image(result, caption="Обработанное изображение", use_column_width=True)
+                st.image(result, caption="Обработанное изображение", use_container_width=True)
 
                 buf = BytesIO()
                 result.save(buf, format="PNG")

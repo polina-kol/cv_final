@@ -17,7 +17,7 @@ with tab1:
             image = Image.open(file)
             slice_type = classify_slice(image)
             detection_image = detect_tumor(image, slice_type)
-            st.image(detection_image, caption=f"{slice_type.upper()} срез — результат YOLO", use_column_width=True)
+            st.image(detection_image, caption=f"{slice_type.upper()} срез — результат YOLO", use_container_width=True)
     else:
         url = st.text_input("Введите URL изображения:")
         if st.button("Обработать по ссылке"):
@@ -26,7 +26,7 @@ with tab1:
                 image = Image.open(BytesIO(response.content))
                 slice_type = classify_slice(image)
                 detection_image = detect_tumor(image, slice_type)
-                st.image(detection_image, caption=f"{slice_type.upper()} срез — результат YOLO", use_column_width=True)
+                st.image(detection_image, caption=f"{slice_type.upper()} срез — результат YOLO", use_container_width=True)
             except:
                 st.error("Ошибка при загрузке изображения.")
 

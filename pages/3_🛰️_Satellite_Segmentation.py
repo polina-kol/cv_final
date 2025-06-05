@@ -16,7 +16,7 @@ with tab1:
         for file in uploaded_files:
             image = Image.open(file)
             mask = run_unet_segmentation(image)
-            st.image(mask, caption=f"Сегментация: {file.name}", use_column_width=True)
+            st.image(mask, caption=f"Сегментация: {file.name}", use_container_width=True)
     else:
         url = st.text_input("Введите URL изображения:")
         if st.button("Обработать по ссылке"):
@@ -24,7 +24,7 @@ with tab1:
                 response = requests.get(url)
                 image = Image.open(BytesIO(response.content))
                 mask = run_unet_segmentation(image)
-                st.image(mask, caption="Сегментация (по ссылке)", use_column_width=True)
+                st.image(mask, caption="Сегментация (по ссылке)", use_container_width=True)
             except:
                 st.error("Ошибка при загрузке изображения.")
 
