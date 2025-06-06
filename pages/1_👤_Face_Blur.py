@@ -12,6 +12,9 @@ tab1, tab2 = st.tabs(["Сервис", "Информация о модели"])
 with tab1:
     source = st.radio("Источник изображений:", ["Загрузка файлов", "Ссылка (URL)"])
 
+    # Ползунок для выбора силы блюра
+    blur_radius = st.slider("Сила блюра", min_value=1, max_value=50, value=15, step=1)
+
     if source == "Загрузка файлов":
         uploaded_files = st.file_uploader(
             "Загрузите изображение(я)", type=['jpg', 'jpeg', 'png'], accept_multiple_files=True
@@ -19,7 +22,7 @@ with tab1:
         if uploaded_files:
             for file in uploaded_files:
                 image = Image.open(file).convert("RGB")
-                result = detect_and_blur_faces(image)
+                result = detect_and_blur_faces(image, blur_radius=blur_radius)
                 
                 st.image(result, caption=f"Обработано: {file.name}", use_container_width=True)
                 
@@ -38,7 +41,7 @@ with tab1:
             try:
                 response = requests.get(url)
                 image = Image.open(BytesIO(response.content)).convert("RGB")
-                result = detect_and_blur_faces(image)
+                result = detect_and_blur_faces(image, blur_radius=blur_radius)
 
                 st.image(result, caption="Обработанное изображение", use_container_width=True)
 
