@@ -8,7 +8,7 @@ MODEL_PATH = "models/unet_forest.pth"
 
 @st.cache_resource
 def load_model():
-    model = UNet(in_channels=3, out_channels=1)
+    model = UNet(n_class=1)  # <-- Такой способ создания соответствует вашему классу
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model.load_state_dict(torch.load(MODEL_PATH, map_location=device))
     model.to(device)
