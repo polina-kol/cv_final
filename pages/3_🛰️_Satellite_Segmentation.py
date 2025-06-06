@@ -4,7 +4,7 @@ from PIL import Image
 import requests
 from io import BytesIO
 
-st.set_page_config(page_title="🛰️ Сегментация спутниковых снимков", page_icon="🛰️")
+st.set_page_config(page_title="Сегментация спутниковых снимков", page_icon="🛰️")
 st.title("🛰️ Сегментация спутниковых снимков (U-Net)")
 
 tab1, tab2 = st.tabs(["Сервис", "Информация о модели"])

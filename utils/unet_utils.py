@@ -1,7 +1,7 @@
 import torch
 import torchvision.transforms as transforms
 from PIL import Image
-from models.my_unet import UNet
+from models.unet_forest import UNet
 import streamlit as st
 
 MODEL_PATH = "models/unet_forest.pth"
