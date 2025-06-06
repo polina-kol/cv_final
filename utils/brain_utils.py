@@ -34,6 +34,6 @@ def detect_tumor(image: Image.Image, slice_type: str) -> Image.Image:
         raise ValueError(f"Unsupported slice type: {slice_type}. Choose from 'axial', 'sagittal', or 'coronal'.")
     
     model = yolo_models[slice_type]
-    results = model.predict(image, conf=0.1, save=False, imgsz=512)
+    results = model.predict(image, conf=0.3, save=False, imgsz=512)
     annotated_image = results[0].plot()  # Получаем изображение с боксами
     return Image.fromarray(annotated_image)

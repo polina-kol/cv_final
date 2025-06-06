@@ -43,20 +43,19 @@ with tab1:
 with tab2:
     st.subheader("YOLOv12m модели для детекции опухоли")
     st.markdown("- 3 отдельных YOLOv12m модели (по типу среза)")
-    st.markdown("- **Эпох**: 150 (у каждой)")
-    st.markdown("- **mAP по срезам**: Axial 0.81, Sagittal 0.78, Coronal 0.80")
+    st.markdown("- **Эпох**: 50 (у каждой)")
 
     with st.expander("📊 Axial — Метрики и описание датасета"):
         st.image("assets/ax_data.png", caption="Data — Axial")
         st.image("assets/confusion_ax.png", caption="Confusion Matrix — Axial")
         st.image("assets/pr_ax.png", caption="PR Curve — Axial")
 
-    with st.expander("📊 Sagittal — Метрики и описание датасета"):
-        st.image("assets/data_sag.png", caption="Data — Sagittal")
-        st.image("assets/conf_sag.png", caption="Confusion Matrix — Sagittal")
-        st.image("assets/pr_sag.png", caption="PR Curve — Sagittal")
-
     with st.expander("📊 Coronal — Метрики и описание датасета"):
         st.image("assets/data_cor.png", caption="Data — Coronal")
         st.image("assets/confusion_cor.png", caption="Confusion Matrix — Coronal")
         st.image("assets/pr_cor.png", caption="PR Curve — Coronal")
+
+    with st.expander("📊 Sagittal — Метрики и описание датасета"):
+        st.image("assets/data_sag.png", caption="Data — Sagittal")
+        st.image("assets/conf_sag.png", caption="Confusion Matrix — Sagittal")
+        st.image("assets/pr_sag.png", caption="PR Curve — Sagittal")
